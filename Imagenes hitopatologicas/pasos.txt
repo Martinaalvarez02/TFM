@@ -1,0 +1,26 @@
+Para llevar a cabo la clasificación con imágenes, es necesario acceder al portal GDC y descargar el correspondiente archivo manifest, en este caso: "gdc_manifest_Liver.txt".
+
+Una vez descargado el archivo, el siguiente paso consiste en iniciar la descarga de las imágenes utilizando la herramienta gdc-client, con el siguiente comando:
+			./gdc-client download -m "gdc_manifest_Liver.txt"
+
+Por cada imagen descargada, se generará automáticamente una carpeta con su nombre, dentro de la cual se encontrará la imagen en formato .svs.
+
+Finalizada la descarga, se utilizó el script "carpeta_unica_slides.py" para agrupar todas las imágenes .svs en una única carpeta.
+
+El siguiente paso consiste en realizar la segmentación, la extracción de parches y la extracción de características de dichos parches para cada imagen. Para ello, se empleó la herramienta Trident, mediante el siguiente comando:
+python3 run_batch_of_slides.py --task all --wsi_dir slidesM --job_dir outputTotal --patch_encoder resnet50 --mag 40 --patch_size 512
+
+Donde:
+
+    -slidesM es la carpeta que contiene todas las imágenes en formato .svs.
+
+    -outputTotal es el directorio de salida.
+
+    -resnet50 es el patch encoder utilizado (puede modificarse por otro).
+
+    -40 es el nivel de magnificación (se puede ajustar).
+
+    -512 es el tamaño de los parches (patch size, también configurable).
+    
+Una vez finalizada la clasificación, el siguiente paso es hacer la clasificación de los dos tipos de cáncer de hígado. Los scripts que se han utilizado se encuentran en la carpeta "Modelos", en estos se encuentran varios modelos que se han probado y distintas técnicas de desbalanceo.
+
