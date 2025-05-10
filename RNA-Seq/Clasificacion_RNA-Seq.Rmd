@@ -2,16 +2,57 @@
 title: "PROBLEMA DE CLASIFICACIÓN MULTI-CLASE: RNA-seq"
 author: "Martina Álvarez Lorenzo"
 output: 
-  html_document:
-      theme: 
-        version: 4
-      highlight: haddock
-      toc: true 
-      toc_depth: 3 
-      number_sections: true
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    keep_tex: true
+    latex_engine: xelatex
+    highlight: tango
+    fig_caption: true
 editor_options: 
   markdown: 
     wrap: 72
+geometry: a4paper, margin=2.5cm
+linestretch: 1.5
+header-includes:
+  - \usepackage{fancyvrb}
+  - \usepackage{listings}
+  - \usepackage{longtable}
+  - \usepackage{float}
+  - \usepackage{placeins}
+  - \usepackage{titlesec}
+  - \usepackage{etoolbox}
+  - \usepackage{adjustbox}
+  - \usepackage{fancyhdr}
+  - \usepackage{lmodern}
+  - \usepackage{microtype}
+  - \usepackage{hyperref}       
+  - \usepackage{titling}       
+  - \usepackage{lipsum}        
+  - \pretitle{\begin{center}\Huge\bfseries\vspace*{5cm}}  
+  - \posttitle{\end{center}}
+  - \preauthor{\begin{center}\Large}                      
+  - \postauthor{\end{center}}
+  - \predate{\begin{center}\Large}                        
+  - \postdate{\end{center}\vfill}                         
+  - \titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip} % Espaciado
+  - \newcommand{\sectionbreak}{\clearpage}                
+chunk_options:
+  tidy: true
+  out.width: "80%"
+#output: 
+#  html_document:
+#    theme: 
+#      version: 4
+#    highlight: haddock
+#    toc: true 
+#    toc_depth: 3 
+#    number_sections: true
+#editor_options: 
+#  markdown: 
+#    wrap: 72
+
 ---
 
 ```{r setup, include=FALSE}
@@ -2421,8 +2462,8 @@ meanACCTestRF <- colMeans(ACCTestRF)
 
 plot(1:20, meanACCTrnRF[1:20], type = "l", col = "blue", lwd = 2, 
      ylim = c(0.85, 1),
-     xlab = "Number of genes", ylab = "Accuracy", 
-     main = "Accuracy Evolution (Train/Test)", xlim = c(1, 20))
+     xlab = "Número de genes", ylab = "Precisión", 
+     main = "Evolución de precisión (Train/Test)", xlim = c(1, 20))
 lines(1:20, meanACCTestRF[1:20], col = "red", lwd = 2, lty = 2)
 legend("bottomright", legend = c("Train", "Test"), col = 
          c("blue", "red"), lty = 1, lwd = 2)
@@ -2449,8 +2490,8 @@ meanACCTestRF <- colMeans(ACCTestRF)
 
 plot(1:20, meanACCTrnRF[1:20], type = "l", col = "blue", lwd = 2, 
      ylim = c(0.85, 1),
-     xlab = "Number of genes", ylab = "Accuracy", 
-     main = "Accuracy Evolution (Train/Test)", xlim = c(1, 20))
+     xlab = "Número de genes", ylab = "Precisión", 
+     main = "Evolución de precisión (Train/Test)", xlim = c(1, 20))
 lines(1:20, meanACCTestRF[1:20], col = "red", lwd = 2, lty = 2)
 legend("bottomright", legend = c("Train", "Test"), col = 
          c("blue", "red"), lty = 1, lwd = 2)
