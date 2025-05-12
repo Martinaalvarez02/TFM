@@ -2,56 +2,16 @@
 title: "PROBLEMA DE CLASIFICACIÓN MULTI-CLASE: RNA-seq"
 author: "Martina Álvarez Lorenzo"
 output: 
-  pdf_document:
-    toc: true
-    toc_depth: 3
+  html_document:
+    theme: 
+      version: 4
+    highlight: haddock
+    toc: true 
+    toc_depth: 3 
     number_sections: true
-    keep_tex: true
-    latex_engine: xelatex
-    highlight: tango
-    fig_caption: true
 editor_options: 
   markdown: 
     wrap: 72
-geometry: a4paper, margin=2.5cm
-linestretch: 1.5
-header-includes:
-  - \usepackage{fancyvrb}
-  - \usepackage{listings}
-  - \usepackage{longtable}
-  - \usepackage{float}
-  - \usepackage{placeins}
-  - \usepackage{titlesec}
-  - \usepackage{etoolbox}
-  - \usepackage{adjustbox}
-  - \usepackage{fancyhdr}
-  - \usepackage{lmodern}
-  - \usepackage{microtype}
-  - \usepackage{hyperref}       
-  - \usepackage{titling}       
-  - \usepackage{lipsum}        
-  - \pretitle{\begin{center}\Huge\bfseries\vspace*{5cm}}  
-  - \posttitle{\end{center}}
-  - \preauthor{\begin{center}\Large}                      
-  - \postauthor{\end{center}}
-  - \predate{\begin{center}\Large}                        
-  - \postdate{\end{center}\vfill}                         
-  - \titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip} % Espaciado
-  - \newcommand{\sectionbreak}{\clearpage}                
-chunk_options:
-  tidy: true
-  out.width: "80%"
-#output: 
-#  html_document:
-#    theme: 
-#      version: 4
-#    highlight: haddock
-#    toc: true 
-#    toc_depth: 3 
-#    number_sections: true
-#editor_options: 
-#  markdown: 
-#    wrap: 72
 
 ---
 
@@ -2544,7 +2504,7 @@ meanACCTrnRF
 meanACCTestRF
 ```
 
-Tras analizar estos resultados, considero acertada la elección de utilizar **4 genes como huella**, ya que la precisión media obtenida en los datos de entrenamiento es 0.9847515 y en los datos de prueba es 0.9782370 Estos valores son bastante beunos y reflejan un rendimiento excelente tanto en los datos de entrenamiento como en los de prueba. Además, se observa que al aumentar el número de genes, las medias se mantienen estables, lo que indica que añadir más genes no aporta mejoras significativas al rendimiento del modelo. Por lo tanto, con 6 genes se logra un buen balance entre rendimiento y eficiencia, y esta elección resulta ser la más adecuada para el modelo.
+Tras analizar estos resultados, considero acertada la elección de utilizar **4 genes como huella**, ya que la precisión media obtenida en los datos de entrenamiento es 0.9847515 y en los datos de prueba es 0.9782370 Estos valores son bastante beunos y reflejan un rendimiento excelente tanto en los datos de entrenamiento como en los de prueba. Además, se observa que al aumentar el número de genes, las medias se mantienen estables, lo que indica que añadir más genes no aporta mejoras significativas al rendimiento del modelo. Por lo tanto, con 4 genes se logra un buen balance entre rendimiento y eficiencia, y esta elección resulta ser la más adecuada para el modelo.
 
 
 ## Resultado de la huella final y clasificador en 5CV
