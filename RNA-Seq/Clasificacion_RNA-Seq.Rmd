@@ -2,17 +2,57 @@
 title: "PROBLEMA DE CLASIFICACIÓN MULTI-CLASE: RNA-seq"
 author: "Martina Álvarez Lorenzo"
 output: 
-  html_document:
-    theme: 
-      version: 4
-    highlight: haddock
-    toc: true 
-    toc_depth: 3 
+  pdf_document:
+    toc: true
+    toc_depth: 3
     number_sections: true
+    keep_tex: true
+    latex_engine: xelatex
+    highlight: tango
+    fig_caption: true
 editor_options: 
   markdown: 
     wrap: 72
-
+geometry: a4paper, margin=2.5cm
+linestretch: 1.5
+header-includes:
+  - \usepackage{fancyvrb}
+  - \usepackage{listings}
+  - \usepackage{longtable}
+  - \usepackage{float}
+  - \usepackage{placeins}
+  - \usepackage{titlesec}
+  - \usepackage{etoolbox}
+  - \usepackage{adjustbox}
+  - \usepackage{fancyhdr}
+  - \usepackage{lmodern}
+  - \usepackage{microtype}
+  - \usepackage{hyperref}       
+  - \usepackage{titling}       
+  - \usepackage{lipsum}        
+  - \pretitle{\begin{center}\Huge\bfseries\vspace*{5cm}}  
+  - \posttitle{\end{center}}
+  - \preauthor{\begin{center}\Large}                      
+  - \postauthor{\end{center}}
+  - \predate{\begin{center}\Large}                        
+  - \postdate{\end{center}\vfill}                         
+  - \titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip} % Espaciado
+  - \newcommand{\sectionbreak}{\clearpage}                
+chunk_options:
+  tidy: true
+  out.width: "80%"
+  
+#output: 
+#  html_document:
+#    theme: 
+#      version: 4
+#    highlight: haddock
+#    toc: true 
+#    toc_depth: 3 
+#    number_sections: true
+#editor_options: 
+#  markdown: 
+#    wrap: 72  html_document:
 ---
 
 ```{r setup, include=FALSE}
