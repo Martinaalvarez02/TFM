@@ -11,6 +11,7 @@ from sklearn.metrics import roc_auc_score, classification_report, confusion_matr
 import seaborn as sns
 import matplotlib.pyplot as plt
 from trident.slide_encoder_models import ABMILSlideEncoder
+from sklearn.metrics import balanced_accuracy_score
 
 # --- Configuración de rutas ---
 wsi_dir = "slidesM"
@@ -152,6 +153,8 @@ def main():
     print(f"Test Accuracy: {accuracy:.4f}")
 
     predicted_labels = (all_outputs > 0).astype(int)
+    balanced_acc = balanced_accuracy_score(all_labels, predicted_labels)
+    print(f"Balanced Accuracy: {balanced_acc:.4f}")
     print("\nClassification Report:")
     print(classification_report(all_labels, predicted_labels))
 

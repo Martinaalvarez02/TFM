@@ -13,6 +13,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
+from sklearn.metrics import balanced_accuracy_score
 
 # --- Semilla ---
 SEED = 1234
@@ -143,11 +144,14 @@ def main():
     auc = roc_auc_score(all_labels, all_outputs)
     accuracy = correct / total
 
+
     ## Resultados
     print(f"\nTest AUC: {auc:.4f}")
     print(f"Test Accuracy: {accuracy:.4f}")
 
     pred_labels = (all_outputs > 0).astype(int)
+    balanced_acc = balanced_accuracy_score(all_labels, pred_labels)
+    print(f"Balanced Accuracy: {balanced_acc:.4f}")
     print("\nClassification Report:")
     print(classification_report(all_labels, pred_labels, target_names=le.classes_))
 
