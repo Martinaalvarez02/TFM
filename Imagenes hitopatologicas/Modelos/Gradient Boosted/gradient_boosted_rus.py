@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import xgboost as xgb
 from imblearn.under_sampling import RandomUnderSampler 
+from sklearn.metrics import balanced_accuracy_score
 
 df = pd.read_csv("slidesM/completo.csv", sep=";")
 df = df.rename(columns={"filename": "slide_id", "clase": "label"})
@@ -87,9 +88,11 @@ y_pred = (y_pred_proba > 0.5).astype(int)
 # --- Evaluación ---
 auc = roc_auc_score(y_test, y_pred_proba)
 acc = accuracy_score(y_test, y_pred)
+bal_acc = balanced_accuracy_score(y_test, y_pred)
 
 print(f"\nAUC: {auc:.4f}")
 print(f"Accuracy: {acc:.4f}")
+print(f"Balanced Accuracy: {bal_acc:.4f}")
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
