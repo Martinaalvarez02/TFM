@@ -25,19 +25,19 @@ torch.cuda.manual_seed_all(SEED)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-# --- Configuración de rutas ---
+# --- Configuramos las rutas ---
 wsi_dir = "slidesM"
 coords_dir = "outputTotal"
 dir_h5 = 'outputTotal/40x_512px_0px_overlap/features_resnet50'
 
-# --- Cargar CSV ---
+# --- Cargamos CSV ---
 df = pd.read_csv(os.path.join(wsi_dir, 'completo.csv'), sep=";")
 df = df.rename(columns={"filename": "slide_id", "clase": "label"})
 
-# --- Dividir en train/test ---
+# --- Dividimos en train/test ---
 train_df, test_df = train_test_split(df, test_size=0.25, stratify=df['label'], random_state=SEED)
 
-# --- Codificar etiquetas ---
+# --- Codificamos etiquetas ---
 le = LabelEncoder()
 train_df['label_enc'] = le.fit_transform(train_df['label'].astype(str))
 test_df['label_enc'] = le.transform(test_df['label'].astype(str))
@@ -110,7 +110,7 @@ def extract_embeddings(model, dataloader, device):
     with torch.no_grad():
         for features, label in dataloader:
             features = features.to(device)
-            emb = model.feature_encoder({'features': features})  # <- Corregido aquí
+            emb = model.feature_encoder({'features': features}) 
             emb = emb.view(emb.size(0), -1)
             embeddings.append(emb.cpu().numpy())
             labels.append(label.numpy())
@@ -132,14 +132,14 @@ def main():
 
     model = BinaryClassificationModel(input_feature_dim=1024).to(device)
 
-    # --- Extraer embeddings ---
+    # --- Extraemos embeddings ---
     print("Extrayendo características de entrenamiento...")
     X_train, y_train = extract_embeddings(model, train_loader, device)
 
     print("Extrayendo características de prueba...")
     X_test, y_test = extract_embeddings(model, test_loader, device)
 
-    # --- Aplicar SMOTE ---
+    # --- Aplicamos SMOTE ---
     print("Aplicando SMOTE para balancear clases...")
     smote = SMOTE(random_state=SEED)
     X_train_res, y_train_res = smote.fit_resample(X_train, y_train)

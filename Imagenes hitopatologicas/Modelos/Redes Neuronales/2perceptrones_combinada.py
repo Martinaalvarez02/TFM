@@ -16,7 +16,7 @@ from trident.slide_encoder_models import ABMILSlideEncoder
 wsi_dir = "slidesM"
 coords_dir = "outputTotal"
 
-# --- Cargar CSV y renombrar columnas ---
+# --- Cargamos CSV y renombramos columnas ---
 df = pd.read_csv(os.path.join(wsi_dir, 'completo.csv'), sep=";")
 df = df.rename(columns={"filename": "slide_id", "clase": "label"})
 
@@ -153,7 +153,7 @@ def main():
     test_loader_0 = DataLoader(H5Dataset(feats_path, test[test['label'] == 0], "test"), batch_size=1, shuffle=False)
     test_loader_1 = DataLoader(H5Dataset(feats_path, test[test['label'] == 1], "test"), batch_size=1, shuffle=False)
 
-    # Crear y entrenar el modelo para la clase 0
+    # Creamos y entrenamos el modelo para la clase 0
     print("\n--- Entrenando modelo para clase 0 ---")
     model0 = BaseModel()
     train_model(model0, train_loader_0, num_epochs=30, device=device)
@@ -162,7 +162,7 @@ def main():
     print("\n--- Evaluando modelo para clase 0 ---")
     preds_0, labels_0 = evaluate_model(model0, test_loader_0, device)
 
-    # Crear y entrenar el modelo para la clase 1
+    # Creamos y entrenamos el modelo para la clase 1
     print("\n--- Entrenando modelo para clase 1 ---")
     model1 = BaseModel()
     train_model(model1, train_loader_1, num_epochs=30, device=device)
@@ -195,7 +195,7 @@ def main():
     train_combined = train.copy()
     train_loader_combined = DataLoader(H5Dataset(feats_path, train_combined, "train"), batch_size=batch_size, shuffle=True)
 
-    # Crear y entrenar el modelo con ambas clases
+    # Creamos y entrenamos el modelo con ambas clases
     model_combined = BaseModel()
     train_model(model_combined, train_loader_combined, num_epochs=30, device=device)
 

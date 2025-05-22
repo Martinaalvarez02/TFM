@@ -22,19 +22,19 @@ torch.cuda.manual_seed_all(SEED)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-# --- Configuración de rutas ---
+# --- Configuramos las rutas ---
 wsi_dir = "slidesM"
 coords_dir = "outputTotal"
 dir_h5 = 'outputTotal/40x_512px_0px_overlap/features_resnet50'
 
-# --- Cargar CSV ---
+# --- Cargamos CSV ---
 df = pd.read_csv(os.path.join(wsi_dir, 'completo.csv'), sep=";")
 df = df.rename(columns={"filename": "slide_id", "clase": "label"})
 
-# --- Dividir en train/test ---
+# --- Dividimos en train/test ---
 train_df, test_df = train_test_split(df, test_size=0.25, stratify=df['label'], random_state=SEED)
 
-# --- Extraer características promedio (mean pooling) ---
+# --- Extraemos características promedio (mean pooling) ---
 def extract_mean_features(df_split):
     X, y, slide_ids = [], [], []
     for _, row in df_split.iterrows():
@@ -51,7 +51,7 @@ def extract_mean_features(df_split):
             print(f"Error cargando {path}: {e}")
     return np.array(X), np.array(y), slide_ids
 
-# --- Extraer características ---
+# --- Extraemos características ---
 print("Extrayendo características de entrenamiento...")
 X_train, y_train, slide_ids_train = extract_mean_features(train_df)
 

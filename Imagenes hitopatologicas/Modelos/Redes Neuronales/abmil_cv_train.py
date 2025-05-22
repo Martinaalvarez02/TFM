@@ -12,12 +12,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from trident.slide_encoder_models import ABMILSlideEncoder
 
-# --- Configuración de rutas ---
+# --- Configuramos las rutas ---
 wsi_dir = "slidesM"
 coords_dir = "outputTotal"
 dir_h5 = 'outputTotal/40x_512px_0px_overlap'
 
-# --- Cargar CSV ---
+# --- Cargamos CSV ---
 df = pd.read_csv(os.path.join(wsi_dir, 'completo.csv'), sep=";")
 df = df.rename(columns={"filename": "slide_id", "clase": "label"})
 

@@ -14,11 +14,11 @@ from trident.slide_encoder_models import ABMILSlideEncoder
 from sklearn.metrics import balanced_accuracy_score
 
 
-# --- Configuración de rutas ---
+# --- Configuramos las rutas ---
 wsi_dir = "slidesM"
 coords_dir = "outputTotal"
 
-# --- Cargar CSV y renombrar columnas ---
+# --- Cargamos CSV y renombramos columnas ---
 df = pd.read_csv(os.path.join(wsi_dir, 'completo.csv'), sep=";")
 df = df.rename(columns={"filename": "slide_id", "clase": "label"})
 
