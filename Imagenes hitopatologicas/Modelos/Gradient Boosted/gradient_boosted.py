@@ -25,20 +25,20 @@ def extract_features(df_split):
         try:
             with h5py.File(path, "r") as f:
                 feats = f["features"][:]
-                feats_mean = np.mean(feats, axis=0)  # Pooling
+                feats_mean = np.mean(feats, axis=0)  
                 X.append(feats_mean)
                 y.append(row["label"])
         except Exception as e:
             print(f"Error cargando {path}: {e}")
     return np.array(X), np.array(y)
 
-# --- Extraer características ---
+# --- Extraemos características ---
 print("Extrayendo características de entrenamiento...")
 X_train, y_train = extract_features(train)
 print("Extrayendo características de prueba...")
 X_test, y_test = extract_features(test)
 
-# --- Entrenar modelo XGBoost ---
+# --- Entrenamos modelo XGBoost ---
 model = xgb.XGBClassifier(
     objective="binary:logistic",
     eval_metric="logloss",
