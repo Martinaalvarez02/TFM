@@ -25,14 +25,14 @@ def extract_features(df_split):
         try:
             with h5py.File(path, "r") as f:
                 feats = f["features"][:]
-                feats_mean = np.mean(feats, axis=0)  # Pooling
+                feats_mean = np.mean(feats, axis=0)  
                 X.append(feats_mean)
                 y.append(row["label"])
         except Exception as e:
             print(f"Error cargando {path}: {e}")
     return np.array(X), np.array(y)
 
-# --- Extraer características ---
+# --- Extraemos características ---
 print("Extrayendo características de entrenamiento...")
 X_train, y_train = extract_features(train)
 print("Extrayendo características de prueba...")
@@ -47,12 +47,12 @@ param_grid = {
     'max_iter': [100, 200, 300]
 }
 
-# --- Configurar Regresión Logística y GridSearchCV ---
+# --- Configuramos Regresión Logística y GridSearchCV ---
 model = LogisticRegression(random_state=42)
 
 grid_search = GridSearchCV(estimator=model, param_grid=param_grid, scoring='roc_auc', cv=3, verbose=2, n_jobs=-1)
 
-# --- Entrenar modelo con GridSearch ---
+# --- Entrenamos modelo con GridSearch ---
 grid_search.fit(X_train, y_train)
 
 # --- Mejor combinación de parámetros ---

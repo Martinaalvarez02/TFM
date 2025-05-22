@@ -26,29 +26,29 @@ def extract_features(df_split):
         try:
             with h5py.File(path, "r") as f:
                 feats = f["features"][:]
-                feats_mean = np.mean(feats, axis=0)  # Pooling
+                feats_mean = np.mean(feats, axis=0)  
                 X.append(feats_mean)
                 y.append(row["label"])
         except Exception as e:
             print(f"Error cargando {path}: {e}")
     return np.array(X), np.array(y)
 
-# --- Extraer características ---
+# --- Extraemos características ---
 print("Extrayendo características de entrenamiento...")
 X_train, y_train = extract_features(train)
 print("Extrayendo características de prueba...")
 X_test, y_test = extract_features(test)
 
-# --- Ver distribución de clases antes de undersampling ---
+# --- Vemos distribución de clases antes de undersampling ---
 print("\nDistribución de clases en el conjunto de entrenamiento antes de undersampling:")
 print(pd.Series(y_train).value_counts())
 
-# --- Aplicar undersampling ---
+# --- Aplicamos undersampling ---
 print("Aplicando undersampling para balancear clases...")
 rus = RandomUnderSampler(random_state=42)
 X_train_res, y_train_res = rus.fit_resample(X_train, y_train)
 
-# --- Ver distribución de clases después de undersampling ---
+# --- Vemos distribución de clases después de undersampling ---
 print("\nDistribución de clases en el conjunto de entrenamiento después de undersampling:")
 print(pd.Series(y_train_res).value_counts())
 
@@ -60,12 +60,12 @@ param_grid = {
     'max_iter': [100, 200, 300]
 }
 
-# --- Configurar Regresión Logística y GridSearchCV ---
+# --- Configuramos Regresión Logística y GridSearchCV ---
 model = LogisticRegression(random_state=42)
 
 grid_search = GridSearchCV(estimator=model, param_grid=param_grid, scoring='roc_auc', cv=3, verbose=2, n_jobs=-1)
 
-# --- Entrenar modelo con GridSearch ---
+# --- Entrenamos modelo con GridSearch ---
 grid_search.fit(X_train_res, y_train_res)
 
 # --- Mejor combinación de parámetros ---
