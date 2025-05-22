@@ -11,6 +11,8 @@ from sklearn.metrics import roc_auc_score, classification_report, confusion_matr
 import seaborn as sns
 import matplotlib.pyplot as plt
 from trident.slide_encoder_models import ABMILSlideEncoder
+from sklearn.metrics import balanced_accuracy_score
+
 
 # --- Configuración de rutas ---
 wsi_dir = "slidesM"
@@ -147,16 +149,19 @@ def main():
 
         all_outputs = np.concatenate(all_outputs)
         all_labels = np.concatenate(all_labels)
+        predicted_labels = (all_outputs > 0).astype(int) 
+
         auc = roc_auc_score(all_labels, all_outputs)
         accuracy = correct / total
+        bal_acc = balanced_accuracy_score(all_labels, predicted_labels)  
 
         all_aucs.append(auc)
         all_accs.append(accuracy)
 
-        print(f"\nFold {fold+1} - AUC: {auc:.4f}, Accuracy: {accuracy:.4f}")
+        print(f"\nFold {fold+1} - AUC: {auc:.4f}, Accuracy: {accuracy:.4f} - Balanced Accuracy: {bal_acc:.4f}")
         print("\nClassification Report:")
-        predicted_labels = (all_outputs > 0).astype(int)
         print(classification_report(all_labels, predicted_labels))
+
 
         cm = confusion_matrix(all_labels, predicted_labels)
         print("Confusion Matrix:")
