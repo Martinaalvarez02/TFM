@@ -26,20 +26,20 @@ def extract_features(df_split):
         try:
             with h5py.File(path, "r") as f:
                 feats = f["features"][:]
-                feats_mean = np.mean(feats, axis=0)  # Pooling
+                feats_mean = np.mean(feats, axis=0)  
                 X.append(feats_mean)
                 y.append(row["label"])
         except Exception as e:
             print(f"Error cargando {path}: {e}")
     return np.array(X), np.array(y)
 
-# --- Extraer características ---
+# --- Extraemos características ---
 print("Extrayendo características de entrenamiento...")
 X_train, y_train = extract_features(train)
 print("Extrayendo características de prueba...")
 X_test, y_test = extract_features(test)
 
-# --- Ver distribución de clases antes del resampleo ---
+# --- Vemos distribución de clases antes del undersampling ---
 print("\nDistribución de clases en el conjunto de entrenamiento antes del undersampling:")
 print(pd.Series(y_train).value_counts())
 
