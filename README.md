@@ -13,6 +13,6 @@ correlaciones entre patrones de expresión génica y señales morfológicas pres
 
 En este repositorio podrán encontrar dos carpetas, una para cada enfoque, donde aparecerán todo lo que se ha necesitado para el desarrollo de ambos.
 
-Para la clasificación de datos de RNA-Seq, se ha desarrollado en R, por lo que podrán encontrar el código empleado en un archivo con extensión .Rmd, al igual que en .pdf y .html. De esta manera dispondrán de varios archivos para visualizar la realización de la clasificación. Se detalla cada uno de los pasos seguidos.
+Para la clasificación de datos de RNA-Seq, se ha desarrollado en R, por lo que podrán encontrar el código empleado en un archivo con extensión .Rmd, al igual que en .pdf y .html. De esta manera dispondrán de varios archivos para visualizar la realización de la clasificación. Se detalla cada uno de los pasos seguidos. Por otro lado, para la clasificación de imágenes histopatológicas, se ha desarrollado en python y en su carpeta correspondiente, podrán encontrar los archivos necesarios para la descarga, preprocesamiento y clasificación.
 
 
